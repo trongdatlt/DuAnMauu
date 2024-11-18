@@ -27,7 +27,7 @@ public class LoaiSachDao {
 
     public int update(LoaiSach loaiSach) {
         ContentValues values = new ContentValues();
-        values.put("TenSach", loaiSach.getTenSach());
+        values.put("TenLoai", loaiSach.getTenSach());
         return db.update("loaisach", values, "MaLoai=?", new String[]{loaiSach.getMaLoai()});
     }
 

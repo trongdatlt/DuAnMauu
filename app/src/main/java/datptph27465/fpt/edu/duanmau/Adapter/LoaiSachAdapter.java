@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,17 +47,48 @@ public class LoaiSachAdapter extends RecyclerView.Adapter<LoaiSachAdapter.ViewHo
             LoaiSach loaiSach = listLoaiSach.get(position);
             holder.txtMaLoai.setText("Mã Loại Sách:"+loaiSach.getMaLoai());
             holder.txtTenLoai.setText("Tên Loại Sách:"+loaiSach.getTenSach());
-//        holder.imgEdit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//            }
-//        });
-//        holder.imgDelete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                showDeleteDialog(loaiSach,position);
-//            }
-//        });
+        holder.imgEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showEditDialog(loaiSach);
+            }
+        });
+        holder.imgDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDeleteDialog(loaiSach,position);
+            }
+        });
+    }
+
+    private void showEditDialog(LoaiSach loaiSach1) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_edit_loaisach, null);
+        builder.setView(dialogView);
+
+        EditText edtTenLoai = dialogView.findViewById(R.id.edtTenLoai);
+        Button btnSave = dialogView.findViewById(R.id.btnSave);
+
+        btnSave.setOnClickListener(v -> {
+            String tenLoai = edtTenLoai.getText().toString();
+            loaiSach1.setTenSach(tenLoai);
+            LoaiSachDao loaiSachDao1 = new LoaiSachDao(context);
+          int kq =  loaiSachDao1.update(loaiSach1);
+          if(kq>0){
+              Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
+              notifyDataSetChanged();
+
+          }else{
+              Toast.makeText(context, "Sửa that bai ", Toast.LENGTH_SHORT).show();
+          }
+
+
+
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
     }
 
     @Override
@@ -99,5 +132,8 @@ public class LoaiSachAdapter extends RecyclerView.Adapter<LoaiSachAdapter.ViewHo
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+
+
 
 }
