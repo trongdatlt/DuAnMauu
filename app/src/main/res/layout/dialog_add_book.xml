@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Mã sách -->
+    <EditText
+        android:id="@+id/etMaSach"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mã sách sẽ được tự động tạo"
+        android:inputType="none"
+        android:focusable="false"
+        android:clickable="false"
+        android:padding="8dp" />
+
+    <!-- Tên sách -->
+    <EditText
+        android:id="@+id/etTenSach"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập tên sách"
+        android:inputType="text"
+        android:padding="8dp"
+        android:layout_marginTop="8dp" />
+
+    <!-- Giá thuê -->
+    <EditText
+        android:id="@+id/etGiaThue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập giá thuê"
+        android:inputType="number"
+        android:padding="8dp"
+        android:layout_marginTop="8dp" />
+
+    <Spinner
+        android:id="@+id/spLoaiSach"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:spinnerMode="dropdown" />
+</LinearLayout>

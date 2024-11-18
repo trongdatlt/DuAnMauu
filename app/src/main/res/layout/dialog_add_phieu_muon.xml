@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Spinner for selecting Member -->
+    <Spinner
+        android:id="@+id/spinnerThanhVien"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+   />
+
+    <!-- Spinner for selecting Book -->
+    <Spinner
+        android:id="@+id/spinnerTenSach"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <!-- EditText for rental price -->
+    <EditText
+        android:id="@+id/tvGiaThue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Giá thuê"
+        android:inputType="numberDecimal"
+        android:padding="8dp"/>
+
+    <!-- EditText for rental date -->
+    <EditText
+        android:id="@+id/tvNgayThue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ngày thuê"
+        android:inputType="date"
+        android:focusable="false"
+        android:padding="8dp"/>
+
+    <!-- RadioGroup for selecting status -->
+    <RadioGroup
+        android:id="@+id/rgTrangThai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbDaTra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đã trả" />
+
+        <RadioButton
+            android:id="@+id/rbChuaTra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chưa trả" />
+    </RadioGroup>
+
+</LinearLayout>

@@ -1,0 +1,60 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="#FFFFFF"
+    android:layout_marginBottom="8dp">
+
+    <!-- Mã sách -->
+    <TextView
+        android:id="@+id/tvMaSach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mã sách"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Tên sách -->
+    <TextView
+        android:id="@+id/tvTenSach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tên sách"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Giá thuê -->
+    <TextView
+        android:id="@+id/tvGiaThue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Giá thuê"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Loại sách -->
+    <TextView
+        android:id="@+id/tvLoaiSach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Loại sách"
+        android:textSize="14sp"
+        android:textColor="#666666" />
+
+    <!-- Nút xóa ở góc phải -->
+    <ImageView
+        android:id="@+id/btnDelete"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="end"
+        android:src="@drawable/baseline_delete_24"
+        android:contentDescription="Xóa sách"
+        android:tint="#FF0000"
+        android:layout_marginTop="-32dp"
+        android:layout_marginEnd="8dp" />
+</LinearLayout>

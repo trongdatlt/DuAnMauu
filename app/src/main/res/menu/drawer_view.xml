@@ -1,0 +1,62 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+        <!-- Existing items -->
+        <item
+            android:id="@+id/nav_PhieuMuon"
+            android:icon="@drawable/home"
+            android:title="Quản lý Phiếu Mượn" />
+
+        <item
+            android:id="@+id/nav_LoaiSach"
+            android:icon="@drawable/category_24px"
+            android:title="Quản lý Loại sách" />
+
+        <item
+            android:id="@+id/nav_Sach"
+            android:icon="@drawable/auto_stories_24px"
+            android:title="Quản lý Sách" />
+
+        <item
+            android:id="@+id/nav_ThanhVien"
+            android:icon="@drawable/quanlythanhvien"
+            android:title="Quản lý Thành viên" />
+
+        <item
+            android:title="Thống kê">
+            <menu>
+                <item
+                    android:id="@+id/sub_Top"
+                    android:icon="@drawable/thongke_24px"
+                    android:title="10 Sách mượn nhiều nhất" />
+
+                <item
+                    android:id="@+id/sub_DoanhThu"
+                    android:icon="@drawable/doanhthu_24px"
+                    android:title="Doanh thu" />
+            </menu>
+        </item>
+
+        <!-- New "Người dùng" item group -->
+        <item
+            android:title="Người dùng">
+            <menu>
+                <item
+                    android:id="@+id/sub_AddUser"
+                    android:icon="@drawable/person_add_24px"
+                    android:title="Thêm người dùng" />
+
+                <item
+                    android:id="@+id/sub_Pass"
+                    android:icon="@drawable/password_24px"
+                    android:title="Thay đổi mật khẩu" />
+
+                <item
+                    android:id="@+id/sub_Logout"
+                    android:icon="@drawable/logout_24px"
+                    android:title="Đăng xuất" />
+            </menu>
+        </item>
+
+    </group>
+</menu>
