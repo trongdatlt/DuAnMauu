@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,16 +66,111 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
             }
         });
 
+        holder.imgEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showEditMemberDialog(thanhVien);
+
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
         return thanhVienList.size();
     }
+    private void showEditMemberDialog(ThanhVien memberToEdit) {
+        // Khởi tạo AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View dialogView = inflater.inflate(R.layout.dialog_add_member, null);
+        builder.setView(dialogView);
 
+        // Lấy các View từ dialog
+        EditText etName = dialogView.findViewById(R.id.etName);
+        EditText etYearOfBirth = dialogView.findViewById(R.id.etYearOfBirth);
+        Button btnCancel = dialogView.findViewById(R.id.btnCancel);
+        Button btnSave = dialogView.findViewById(R.id.btnSave);
+
+        // Hiển thị thông tin thành viên cần sửa
+        etName.setText(memberToEdit.getHoTen());
+        etYearOfBirth.setText(String.valueOf(memberToEdit.getNamSinh()));
+
+        AlertDialog dialog = builder.create();
+
+        // Xử lý nút Hủy
+        btnCancel.setOnClickListener(v -> dialog.dismiss());
+
+        // Xử lý nút Lưu (Cập nhật)
+        btnSave.setOnClickListener(v -> {
+            String name = etName.getText().toString().trim();
+            String yearOfBirthStr = etYearOfBirth.getText().toString().trim();
+
+            if (validateInputs(etName, etYearOfBirth)) {
+                if (name.isEmpty() || yearOfBirthStr.isEmpty()) {
+                    Toast.makeText(context, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                } else {
+                    try {
+                        int yearOfBirth = Integer.parseInt(yearOfBirthStr);
+                        // Cập nhật thông tin thành viên
+                        memberToEdit.setHoTen(name);
+                        memberToEdit.setNamSinh(yearOfBirth);
+            ThanhVienDao thanhVienDao = new ThanhVienDao(context);
+
+                        int result = thanhVienDao.update(memberToEdit);
+                        if (result > 0) {
+                            thanhVienList.clear();
+                            thanhVienList.addAll(thanhVienDao.getAll()); // Lấy lại danh sách thành viên
+                            notifyDataSetChanged();
+                            Toast.makeText(context, "Cập nhật thành công " + name, Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        } else {
+                            Toast.makeText(context, "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (NumberFormatException e) {
+                        Toast.makeText(context, "Năm sinh phải là số!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        dialog.show();
+    }
+    private boolean validateInputs(EditText etName, EditText etYearOfBirth) {
+        String name = etName.getText().toString().trim();
+        String yearOfBirthStr = etYearOfBirth.getText().toString().trim();
+
+        if (name.isEmpty()) {
+            etName.setError("Vui lòng nhập tên");
+            etName.requestFocus();
+            return false;
+        }
+
+        if (yearOfBirthStr.isEmpty()) {
+            etYearOfBirth.setError("Vui lòng nhập năm sinh");
+            etYearOfBirth.requestFocus();
+            return false;
+        }
+
+        try {
+            int yearOfBirth = Integer.parseInt(yearOfBirthStr);
+            if (yearOfBirth < 1900 || yearOfBirth > 2100) {  // Giới hạn năm hợp lý
+                etYearOfBirth.setError("Năm sinh không hợp lệ");
+                etYearOfBirth.requestFocus();
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            etYearOfBirth.setError("Năm sinh phải là số");
+            etYearOfBirth.requestFocus();
+            return false;
+        }
+
+        return true;  // Nếu tất cả các kiểm tra đều hợp lệ
+    }
     public static class ThanhVienViewHolder extends RecyclerView.ViewHolder {
         TextView tvMaTV, tvTenTV, tvNamSinh;
-        ImageView imgDelete;
+        ImageView imgDelete,imgEdit;
 
         public ThanhVienViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -81,6 +178,7 @@ public class ThanhVienAdapter extends RecyclerView.Adapter<ThanhVienAdapter.Than
             tvTenTV = itemView.findViewById(R.id.tvTenTV);
             tvNamSinh = itemView.findViewById(R.id.tvNamSinh);
             imgDelete = itemView.findViewById(R.id.imgDeleteLS);
+            imgEdit = itemView.findViewById(R.id.img_edit);
         }
     }
 

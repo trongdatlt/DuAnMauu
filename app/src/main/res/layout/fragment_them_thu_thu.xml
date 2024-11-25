@@ -47,6 +47,15 @@
         android:padding="12dp"
         android:textColor="#333333"
         android:textSize="16sp"
+        android:layout_marginBottom="24dp" /> <EditText
+        android:id="@+id/etcheckMatKhau"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập Lại Mật Khẩu"
+        android:inputType="textPassword"
+        android:padding="12dp"
+        android:textColor="#333333"
+        android:textSize="16sp"
         android:layout_marginBottom="24dp" />
 
     <!-- Nút Thêm và Hủy -->

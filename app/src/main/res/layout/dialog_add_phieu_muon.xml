@@ -26,6 +26,9 @@
         android:layout_height="wrap_content"
         android:hint="Giá thuê"
         android:inputType="numberDecimal"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
         android:padding="8dp"/>
 
     <!-- EditText for rental date -->
@@ -36,6 +39,8 @@
         android:hint="Ngày thuê"
         android:inputType="date"
         android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
         android:padding="8dp"/>
 
     <!-- RadioGroup for selecting status -->

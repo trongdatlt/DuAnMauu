@@ -46,15 +46,27 @@
         android:textSize="14sp"
         android:textColor="#666666" />
 
-    <!-- Nút xóa ở góc phải -->
-    <ImageView
-        android:id="@+id/btnDelete"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:src="@drawable/baseline_delete_24"
-        android:contentDescription="Xóa sách"
-        android:tint="#FF0000"
-        android:layout_marginTop="-32dp"
-        android:layout_marginEnd="8dp" />
+        >
+        <ImageView
+            android:id="@+id/btnEdit"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/baseline_edit_24"
+            android:contentDescription="Chỉnh sửa"
+            android:layout_marginEnd="8dp" />
+        <ImageView
+            android:id="@+id/btnDelete"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/baseline_delete_24"
+            android:contentDescription="Xóa sách"
+            android:tint="#FF0000"
+          />
+    </LinearLayout>
+    <!-- Nút xóa ở góc phải -->
+
 </LinearLayout>

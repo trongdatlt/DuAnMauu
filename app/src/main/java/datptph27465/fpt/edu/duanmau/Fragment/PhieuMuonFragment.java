@@ -25,6 +25,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import datptph27465.fpt.edu.duanmau.Adapter.PhieuMuonAdapter;
@@ -113,6 +114,7 @@ public class PhieuMuonFragment extends Fragment {
         // Biến lưu trữ ID đã chọn của thành viên và sách
         final int[] selectedMemberId = new int[1];
         final int[] selectedBookId = new int[1];
+        final Sach[] Sachhh = {new Sach()};
 
         // Lắng nghe sự kiện khi chọn thành viên
         spinnerThanhVien.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -134,6 +136,9 @@ public class PhieuMuonFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 Sach selectedSach = sachList.get(position);
                 selectedBookId[0] = selectedSach.getMaSach();  // Lưu ID sách đã chọn
+                tvGiaThue.setText(String.valueOf(selectedSach.getGiaThue()));
+                Sachhh[0] = selectedSach;
+
             }
 
             @Override
@@ -141,46 +146,25 @@ public class PhieuMuonFragment extends Fragment {
                 // Không làm gì khi không chọn gì
             }
         });
-        tvNgayThue.setOnClickListener(v -> {
-            Calendar calendar = Calendar.getInstance();
-            int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH);
-            int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-            DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
-                    (view, year1, monthOfYear, dayOfMonth) -> {
-                        // Cập nhật ngày khi chọn
-                        calendar.set(year1, monthOfYear, dayOfMonth);
-                        tvNgayThue.setText(new SimpleDateFormat("dd/MM/yyyy").format(calendar.getTime()));
-                    }, year, month, day);
-            datePickerDialog.show();
-        });
         // Hiển thị hộp thoại để thêm dữ liệu
         new AlertDialog.Builder(getContext())
                 .setTitle("Thêm Phiếu Mượn Mới")
                 .setView(dialogView)
                 .setPositiveButton("Lưu", (dialog, which) -> {
-                    // Lấy giá trị từ các trường và lưu vào cơ sở dữ liệu
-                    String giaThue = tvGiaThue.getText().toString();
-                    String ngayThue = tvNgayThue.getText().toString();
-
-
                     int trangThai = rgTrangThai.getCheckedRadioButtonId() == rbDaTra.getId() ? 1 : 0;
+                    Date today = new Date();
 
+                    // Định dạng ngày thành dd/MM/yyyy
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    String formattedDate = dateFormat.format(today);
                     PhieuMuon phieuMuon = new PhieuMuon();
                     phieuMuon.setMaTT("");
                     phieuMuon.setMaTV(selectedMemberId[0]);
-                    phieuMuon.setMaSach(selectedBookId[0]);
-                    phieuMuon.setTienThue(Integer.parseInt(giaThue));
-                    phieuMuon.setNgayMuon(ngayThue);
+                    phieuMuon.setMaSach(Sachhh[0].getMaSach());
+                    phieuMuon.setTienThue(Sachhh[0].getGiaThue());
+                    phieuMuon.setNgayMuon(formattedDate);
                     phieuMuon.setTraSach(trangThai);
-                    Log.d("checkloiiiiiiiiiiiiiiiii", "showAddDialog: "+phieuMuon.getMaTV());
-                    Log.d("checkloiiiiiiiiiiiiiiiii", "showAddDialog: "+phieuMuon.getMaTT());
-                    Log.d("checkloiiiiiiiiiiiiiiiii", "showAddDialog: "+phieuMuon.getMaSach());
-                    Log.d("checkloiiiiiiiiiiiiiiiii", "showAddDialog: "+phieuMuon.getTienThue());
-                    Log.d("checkloiiiiiiiiiiiiiiiii", "showAddDialog: "+phieuMuon.getTraSach());
-                    Log.d("checkloiiiiiiiiiiiiiiiii", "showAddDialog: "+phieuMuon.getNgayMuon());
-
                     // Thêm dữ liệu vào cơ sở dữ liệu
                     PhieuMuonDao phieuMuonDao = new PhieuMuonDao(getContext());
                     long result = phieuMuonDao.insert(phieuMuon);  // Gọi phương thức thêm dữ liệu

@@ -53,6 +53,7 @@ public class ThemThuThuFragment extends Fragment {
         EditText etMaThuthu = view.findViewById(R.id.etMaThuthu);
         EditText etHoten =view.findViewById(R.id.etHoten);
         EditText etMatKhau =view.findViewById(R.id.etMatKhau);
+        EditText etNhapLaiMatKhau =view.findViewById(R.id.etcheckMatKhau);
 
         Button btnadd = view.findViewById(R.id.btnAdd);
         Button btnCancel = view.findViewById(R.id.btnCancel);
@@ -62,14 +63,21 @@ public class ThemThuThuFragment extends Fragment {
                 String maThuthu = etMaThuthu.getText().toString().trim();
                 String hoTen = etHoten.getText().toString().trim();
                 String matKhau = etMatKhau.getText().toString().trim();
-                datptph27465.fpt.edu.duanmau.dao.ThuThuDao thuThuDao = new ThuThuDao(getContext());
-               long kq = thuThuDao.insert(new ThuThu(maThuthu,hoTen,matKhau));
-                if(kq>0){
-                    Toast.makeText(getContext(), "Thêm thử thư thành công", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getContext(), "Thêm thử thư thất bại", Toast.LENGTH_SHORT).show();
+                String nhaplaiMatKhau = etNhapLaiMatKhau.getText().toString().trim();
+                    if(matKhau.equals(nhaplaiMatKhau))
+                    {
+                        datptph27465.fpt.edu.duanmau.dao.ThuThuDao thuThuDao = new ThuThuDao(getContext());
+                        long kq = thuThuDao.insert(new ThuThu(maThuthu,hoTen,matKhau));
+                        if(kq>0){
+                            Toast.makeText(getContext(), "Thêm thử thư thành công", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(getContext(), "Thêm thử thư thất bại", Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(getContext(), "Mật khẩu không trùng khớp", Toast.LENGTH_SHORT).show();
 
-                }
+                    }
+
 
             }
         });

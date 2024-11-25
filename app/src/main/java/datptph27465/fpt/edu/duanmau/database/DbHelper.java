@@ -60,6 +60,7 @@ public class DbHelper extends SQLiteOpenHelper {
         // Insert sample data into thuthu
         db.execSQL("INSERT INTO thuthu (MaTT,HoTen, MatKhau) VALUES ('Thuthu001','Nguyễn Văn A', '12345');");
         db.execSQL("INSERT INTO thuthu (MaTT,HoTen, MatKhau) VALUES ('Thuthu002','Trần Thị B', '67890');");
+        db.execSQL("INSERT INTO thuthu (MaTT,HoTen, MatKhau) VALUES ('admin','Phạm Trọng Đạt', 'admin');");
 
         // Insert sample data into thanhvien
         db.execSQL("INSERT INTO thanhvien (HoTen, NamSinh) VALUES ('Lê Văn C', 1990);");

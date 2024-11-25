@@ -38,6 +38,7 @@ public class ThuThuDao {
     }
 
     public Boolean KiemTraDangNhap(String username, String password) {
+
         Log.d("checkLogin", "KiemTraDangNhap: "+username+password);
         Cursor cursor = db.rawQuery("SELECT * FROM thuthu WHERE MaTT = ? AND MatKhau = ?", new String[]{username, password});
         boolean result = cursor.getCount() > 0;

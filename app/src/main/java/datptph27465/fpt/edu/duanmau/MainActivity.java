@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -58,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
         mHeaderView = nv.getHeaderView(0);
         edUser = mHeaderView.findViewById(R.id.txtUser);
         Intent i  = getIntent();
-        edUser.setText("Welcome !");
+        String user = i.getStringExtra("user");
+        edUser.setText(user);
 
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -93,9 +95,16 @@ public class MainActivity extends AppCompatActivity {
                     ThongKeDoanhTHuFragment thongKeDoanhTHuFragment = new ThongKeDoanhTHuFragment();
                     mangager.beginTransaction().replace(R.id.flContent,thongKeDoanhTHuFragment).commit();
                 } else if (item.getItemId() == R.id.sub_AddUser) {
-                    setTitle("Thêm người dùng");
-                    ThemThuThuFragment themThuThuFragment = new ThemThuThuFragment();
-                    mangager.beginTransaction().replace(R.id.flContent,themThuThuFragment).commit();
+                    if(user.equals("admin"))
+                    {
+                        setTitle("Thêm người dùng");
+                        ThemThuThuFragment themThuThuFragment = new ThemThuThuFragment();
+                        mangager.beginTransaction().replace(R.id.flContent,themThuThuFragment).commit();
+                    }else {
+                        // Thông báo và không cho truy cập
+                        Toast.makeText(MainActivity.this, "Bạn không có quyền truy cập vào phần này!", Toast.LENGTH_SHORT).show();
+                    }
+
                 } else if (item.getItemId() == R.id.sub_Pass) {
                     setTitle("Thay đổi mật khẩu");
                     ChangePassFragment changePassFragment = new ChangePassFragment();

@@ -60,7 +60,6 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
          sachList = sachDao.getAll();
 
 
-
         String memberName = "";
         for (ThanhVien thanhVien : thanhVienList) {
             if (thanhVien.getMaTV() == phieuMuon.getMaTV()) {
