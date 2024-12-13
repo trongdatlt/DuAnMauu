@@ -67,7 +67,10 @@ public class LoaiSachAdapter extends RecyclerView.Adapter<LoaiSachAdapter.ViewHo
         builder.setView(dialogView);
 
         EditText edtTenLoai = dialogView.findViewById(R.id.edtTenLoai);
+        edtTenLoai.setText(loaiSach1.getTenSach());
         Button btnSave = dialogView.findViewById(R.id.btnSave);
+        Button btnCancel = dialogView.findViewById(R.id.btnCancel);
+        AlertDialog dialog = builder.create();
 
         btnSave.setOnClickListener(v -> {
             String tenLoai = edtTenLoai.getText().toString();
@@ -85,8 +88,9 @@ public class LoaiSachAdapter extends RecyclerView.Adapter<LoaiSachAdapter.ViewHo
 
 
         });
-
-        AlertDialog dialog = builder.create();
+        btnCancel.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
         dialog.show();
 
     }
