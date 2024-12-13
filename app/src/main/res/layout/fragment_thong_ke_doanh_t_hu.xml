@@ -5,7 +5,6 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Từ ngày -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,7 +29,6 @@
             android:padding="8dp" />
     </LinearLayout>
 
-    <!-- Đến ngày -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,7 +53,6 @@
             android:padding="8dp" />
     </LinearLayout>
 
-    <!-- Nút Doanh Thu -->
     <Button
         android:id="@+id/btnRevenue"
         android:layout_width="wrap_content"
@@ -67,7 +64,6 @@
         android:padding="8dp"
         android:layout_gravity="center_horizontal" />
 
-    <!-- TextView hiển thị Doanh Thu -->
     <TextView
         android:id="@+id/tvRevenue"
         android:layout_width="wrap_content"

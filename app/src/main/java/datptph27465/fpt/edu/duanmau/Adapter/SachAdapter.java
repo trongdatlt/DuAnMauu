@@ -52,7 +52,16 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
         holder.tvMaSach.setText("Mã sách: " + sach.getMaSach());
         holder.tvTenSach.setText("Tên sách: " + sach.getTenSach());
         holder.tvGiaThue.setText("Giá thuê: " + sach.getGiaThue());
-        holder.tvLoaiSach.setText("Loại sách: " + sach.getMaLoai());
+        LoaiSachDao loaiSachDao = new LoaiSachDao(context);
+        List<LoaiSach> loaisachhh = new ArrayList<>();
+        loaisachhh.addAll(        loaiSachDao.getAll());
+        for(int i=0 ; i<loaisachhh.size();i++){
+            if(loaisachhh.get(i).getMaLoai().equals(sach.getMaLoai())){
+                holder.tvLoaiSach.setText("Loại sách: " + loaisachhh.get(i).getTenSach());
+                break;
+            }
+        }
+
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

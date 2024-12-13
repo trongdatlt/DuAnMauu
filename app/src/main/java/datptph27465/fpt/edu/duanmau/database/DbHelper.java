@@ -17,7 +17,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE sach ("
                 + "MaSach INTEGER PRIMARY KEY autoincrement, "
-                + "MaLoai TEXT, "
+                + "MaLoai INTEGER, "
                 + "TenSach TEXT, "
                 + "GiaThue REAL, "
                 + "FOREIGN KEY (MaLoai) REFERENCES loaisach(MaLoai));");
@@ -49,24 +49,19 @@ public class DbHelper extends SQLiteOpenHelper {
                 + "NamSinh INTEGER);");
 
 
-        // Insert sample data into loaisach
         db.execSQL("INSERT INTO loaisach (TenLoai) VALUES ('Sách Khoa Học');");
         db.execSQL("INSERT INTO loaisach (TenLoai) VALUES ('Sách Văn Học');");
 
-        // Insert sample data into sach
         db.execSQL("INSERT INTO sach (MaLoai, TenSach, GiaThue) VALUES (1, 'Lịch Sử Thế Giới', 5000);");
         db.execSQL("INSERT INTO sach (MaLoai, TenSach, GiaThue) VALUES (2, 'Truyện Kiều', 3000);");
 
-        // Insert sample data into thuthu
         db.execSQL("INSERT INTO thuthu (MaTT,HoTen, MatKhau) VALUES ('Thuthu001','Nguyễn Văn A', '12345');");
         db.execSQL("INSERT INTO thuthu (MaTT,HoTen, MatKhau) VALUES ('Thuthu002','Trần Thị B', '67890');");
         db.execSQL("INSERT INTO thuthu (MaTT,HoTen, MatKhau) VALUES ('admin','Phạm Trọng Đạt', 'admin');");
 
-        // Insert sample data into thanhvien
         db.execSQL("INSERT INTO thanhvien (HoTen, NamSinh) VALUES ('Lê Văn C', 1990);");
         db.execSQL("INSERT INTO thanhvien (HoTen, NamSinh) VALUES ('Phạm Thị D', 1995);");
 
-        // Insert sample data into phieumuon
         db.execSQL("INSERT INTO phieumuon (MaTT, MaTV, MaSach, NgayMuon, TraSach, TienThue) VALUES (1, 1, 1, '2024-10-01', '2024-10-15', 5000);");
         db.execSQL("INSERT INTO phieumuon (MaTT, MaTV, MaSach, NgayMuon, TraSach, TienThue) VALUES (2, 2, 2, '2024-10-05', '2024-10-20', 3000);");
     }

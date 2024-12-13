@@ -70,7 +70,6 @@ public class LoaiSachFragment extends Fragment {
 
         EditText etTenLoai = dialogView.findViewById(R.id.etMaLoai);
 
-
         builder.setPositiveButton("Thêm", (dialog, which) -> {
             String tenLoai = etTenLoai.getText().toString().trim();
 

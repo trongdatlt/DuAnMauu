@@ -71,32 +71,29 @@ public class SachFragment extends Fragment {
         List<String> loaiSachNames = new ArrayList<>();
 
         try {
-            loaiSachList = loaiSachDao.getAll(); // Lấy tất cả loại sách từ database
+            loaiSachList = loaiSachDao.getAll();
             for (LoaiSach loaiSach : loaiSachList) {
-                loaiSachNames.add(loaiSach.getTenSach()); // Giả sử LoaiSach có phương thức getTenLoai()
+                loaiSachNames.add(loaiSach.getTenSach());
             }
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(getContext(), "Lỗi khi tải dữ liệu loại sách!", Toast.LENGTH_SHORT).show();
         }
 
-        // Gắn adapter cho Spinner
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, loaiSachNames);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spLoaiSach.setAdapter(adapter1);
 
-        // Lấy mã loại từ Spinner
         final String[] selectedMaLoai = {null}; // Biến lưu trữ mã loại được chọn
         spLoaiSach.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // Lấy mã loại dựa trên vị trí được chọn
                 selectedMaLoai[0] = loaiSachList.get(position).getMaLoai();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                selectedMaLoai[0] = null; // Không có gì được chọn
+                selectedMaLoai[0] = null;
             }
         });
 

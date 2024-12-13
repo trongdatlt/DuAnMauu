@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import datptph27465.fpt.edu.duanmau.Models.PhieuMuon;
 import datptph27465.fpt.edu.duanmau.Models.Sach;
@@ -82,7 +83,14 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
         holder.tvTenSach.setText("Tên sách: " + bookName);
         holder.tvGiaThue.setText("Giá thuê: " + phieuMuon.getTienThue());
         holder.tvNgayThue.setText("Ngày thuê: " + phieuMuon.getNgayMuon());
-        holder.tvTrangThai.setText(phieuMuon.getTraSach() == 1 ? "Đã trả sách" : "Chưa trả sách");
+
+        if (phieuMuon.getTraSach() == 1) {
+            holder.tvTrangThai.setText("Đã trả sách");
+            holder.tvTrangThai.setTextColor(ContextCompat.getColor(context, R.color.green)); // Màu xanh
+        } else {
+            holder.tvTrangThai.setText("Chưa trả sách");
+            holder.tvTrangThai.setTextColor(ContextCompat.getColor(context, R.color.red)); // Màu đỏ hoặc màu mặc định
+        }
 
         holder.btnDelete.setOnClickListener(v -> {
             new AlertDialog.Builder(context)
